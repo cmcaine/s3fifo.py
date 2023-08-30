@@ -15,7 +15,8 @@ S3-FIFO claims these relative advantages over its competitors:
       server-side cache of web content where the browser is the first-level
       cache).
 - memory use
-    - S3-FIFO can outperform an LRU cache 5× bigger at small cache-sizes
+    - In my testing, S3-FIFO can outperform an LRU cache 5× bigger at small
+      cache-sizes
 - runtime speed
     - FIFOs are simpler and faster than the double-linked-lists used in
       LRU-based caches
