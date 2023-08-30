@@ -50,21 +50,6 @@ class S3FIFO:
     usable as a `dict` key. If you want to key on multiple values then use a
     tuple or a hash of those of values as appropriate.
 
-    # Performance testing
-
-    I don't want to get the real world data, but supposedly the distribution of
-    request keys is similar to a Zipf distribution, so I've tested with that.
-
-    I compared S3FIFO with a simple FIFO cache and python's functools.lru_cache,
-    neither of which are state of the art, but they are very easily available!
-
-    In my tests, S3FIFO has a strong relative advantage over those simple
-    competitors when the cache is very small and a modest advantage or no
-    disadvantage when the cache is large. I am a hack and a fraud, so I didn't
-    do significance testing.
-
-    Run my benchmarks with `python3 tests.py`. You'll need scipy.
-
     # References
 
     In my opinion, the best resource for understanding S3-FIFO and why it works
@@ -161,6 +146,21 @@ class S3FIFO:
     Demotion in the article. The ghost FIFO compensates for quick demotion by
     allowing values in it to skip straight to the larger main FIFO if they
     were evicted from S recently enough to still be in the ghost FIFO.
+
+    # Amateur hour performance testing
+
+    I don't want to get the real world data, but supposedly the distribution of
+    request keys is similar to a Zipf distribution, so I've tested with that.
+
+    I compared S3FIFO with a simple FIFO cache and python's `functools.lru_cache`,
+    neither of which are state of the art, but they are very easily available!
+
+    In my tests, S3FIFO has a strong relative advantage over those simple
+    competitors when the cache is very small and a modest advantage or no
+    disadvantage when the cache is large. I am a hack and a fraud, so I didn't
+    do significance testing.
+
+    Run my benchmarks with `python3 tests.py`. You'll need scipy.
     """
 
     def __init__(self, func, max_num_cached):
